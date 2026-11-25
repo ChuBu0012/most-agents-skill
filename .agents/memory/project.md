@@ -1,28 +1,27 @@
-# Project Context: VS Code Extension Creator Skill Agent
+# Project Context: most-agents-skill
 
 ## Purpose
-สร้างและดูแล Agent Skill (`vscode-extension-creator`) สำหรับการสร้าง พัฒนา ทดสอบ และเผยแพร่ Visual Studio Code extensions ตามมาตรฐานทางการของ VS Code API ครบทุกหมวดหมู่
+คลังรวบรวมและพัฒนา Agent Skills (`most-agents-skill`) ส่วนตัวของ Most (@most-too) สำหรับใช้งานร่วมกับ AI Coding Agents ยุคใหม่ (Google Antigravity, Claude Code, Cursor) โดยมี `vscode-extension-creator` เป็น Skill แรก และพร้อมรองรับการเพิ่ม Skill อื่น ๆ ในอนาคต
 
 ## Scope
 - **In Scope**:
-  - Agent Skill specification: `.agents/skills/vscode-extension-creator/SKILL.md`
-  - 11 Modular Reference Guides: ครอบคลุม Get Started, Workbench, Webviews, Language Features & LSP, AI/Copilot extensibility, UX Guidelines, Advanced APIs, Testing, Bundling & Publishing, API Cheatsheet, และ Starter Recipes/Blueprints
+  - Central Skills Directory: `.agents/skills/`
+  - Skill 1: `vscode-extension-creator` (SKILL.md + 11 Modular Reference Guides)
   - Pure Markdown, Zero-Dependency Architecture
-  - Workspace documentation: `AGENTS.md`, `README.md`
+  - Global Documentation: `README.md`, `INTRODUCTION.md`, `AGENTS.md`
 - **Out of Scope**:
-  - การ deploy ขึ้น Visual Studio Marketplace จริงแบบอัตโนมัติ (ต้องใช้ Developer Personal Access Token จริงของผู้ใช้)
+  - การใส่ `node_modules` หรือ runtime package.json ไว้ในตัวโฟลเดอร์ของ Skill
 
 ## Current State
-- [Fact 2026-11-25] โครงสร้างไฟล์ Agent Skill เป็น Pure Markdown 100% ปราศจาก package.json ภายในตัว Skill
-- [Fact 2026-11-25] references/11-starter-recipes-and-boilerplates.md รวบรวม Blueprint ครบ 4 รูปแบบ (Minimal, TreeView, Webview, LSP)
-- [Fact 2026-11-25] ลบโฟลเดอร์ templates/ ออกทั้งหมดแล้ว ทำให้ skill มี 0 runtime dependencies และไม่มีปัญหา nested node packages
+- [Fact 2026-11-25] ปรับเปลี่ยนชื่อและบทบาทโปรเจกต์เป็น `most-agents-skill` เรียบร้อยแล้ว
+- [Fact 2026-11-25] โครงสร้างพร้อมรองรับการเพิ่ม Skill ใหม่ ๆ ภายใต้ `.agents/skills/<skill-name>/`
+- [Fact 2026-11-25] Skill `vscode-extension-creator` มีความสมบูรณ์ 100% ครอบคลุมเอกสาร VS Code API ทั้งหมด
 
 ## Decisions
-- [Decision 2026-11-25] จัดทำในรูปแบบ Agent Skill มาตรฐาน วางไว้ที่ `.agents/skills/vscode-extension-creator/`
-- [Decision 2026-11-25] สรุปเอกสาร VS Code API ทั้งหมด 60+ หน้า ออกเป็น Modular Reference Guides ใน `references/` (11 ไฟล์)
-- [Decision 2026-11-25] ใช้ Pure Markdown Architecture แทนการเก็บ dummy project templates เพื่อความเบาและ Clean 100%
-- [Decision 2026-11-25] ใช้ Modern TypeScript + esbuild + `@vscode/test-cli` เป็น Default Tech Stack ใน Blueprints
-- [Decision 2026-11-25] บังคับใช้ strict CSP and nonces สำหรับ Webviews ทุกตัว
+- [Decision 2026-11-25] รีแบรนด์โปรเจกต์เป็น `most-agents-skill` เพื่อเป็น Hub รวบรวม Skill ทั้งหมดของผู้ใช้
+- [Decision 2026-11-25] บังคับใช้ Pure Markdown Architecture กับทุก Skill ในคลัง เพื่อความสะอาดและเบา 100%
+- [Decision 2026-11-25] จัดเตรียมคู่มือการติดตั้งแบบ Global (`~/.agents/skills/`) ใน README.md และ INTRODUCTION.md
 
 ## Next Steps
-- ผู้ใช้หรือ Agent สามารถเรียกใช้ `.agents/skills/vscode-extension-creator/SKILL.md` เพื่อสร้างหรือแก้ไข VS Code extensions ได้ทันทีโดยไม่ต้องกังวลเรื่อง package ภายใน skill
+- ผู้ใช้สามารถเพิ่ม Skill อื่น ๆ ในอนาคตลงใน `.agents/skills/<skill-name>/`
+- สามารถสร้าง Git remote repository บน GitHub ในชื่อ `most-agents-skill` แล้ว push ขึ้นได้ทันที

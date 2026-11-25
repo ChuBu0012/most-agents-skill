@@ -1,60 +1,89 @@
-# VS Code Extension Creator Skill Agent
+# most-agents-skill 🚀
 
-A comprehensive, production-grade Agent Skill and reference system for creating, modernizing, and publishing Visual Studio Code extensions.
+คลังรวบรวม **Agent Skills** คุณภาพสูง พัฒนาโดย Most ([@most-too](https://github.com/most-too)) ออกแบบมาสำหรับใช้งานร่วมกับ AI Coding Agents ยุคใหม่ (เช่น Google Antigravity, Claude Code, Cursor, GitHub Copilot)
 
-Developed according to the official Visual Studio Code API specifications, modern TypeScript best practices, and the latest extensibility architecture (including GitHub Copilot Chat Participants, Language Model API, and Model Context Protocol).
+ทุก Skill ในคลังนี้ถูกสร้างขึ้นภายใต้ปรัชญา **Pure Markdown (Zero-Dependency)** — สะอาด, น้ำหนักเบา, ไม่มี package ตกค้าง และพร้อมให้ Agent อ่านแล้วนำไปสร้างผลงานลงใน Workspace จริงได้ทันที
+
+---
+
+## 🗂️ Skills Catalog (สารบัญ Skills)
+
+| Skill | Directory | Description |
+|---|---|---|
+| **`vscode-extension-creator`** | [`.agents/skills/vscode-extension-creator`](.agents/skills/vscode-extension-creator/SKILL.md) | ระบบช่วยสร้าง, สถาปัตยกรรม, พัฒนา, ทดสอบ, และ Publish Visual Studio Code Extensions ครอบคลุม VS Code API ทั้งหมด 60+ หน้า พร้อม AI/Copilot extensibility และ Starter Blueprints |
+
+*(กำลังทยอยเพิ่ม Skills อื่น ๆ เพิ่มเติมอย่างต่อเนื่อง)*
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-create-vscode-extension/
+most-agents-skill/
 ├── .agents/
-│   └── skills/
-│       └── vscode-extension-creator/
-│           ├── SKILL.md                              # Main Agent Skill entrypoint (rules, workflows, decision trees)
-│           └── references/                           # 11 In-depth modular domain guides & blueprints
-│               ├── 01-architecture-and-anatomy.md   # Extension Host, lifecycle, manifest, activation
-│               ├── 02-workbench-and-ui.md            # Views, TreeViews, commands, menus, when-clauses, status bar
-│               ├── 03-webviews-and-custom-editors.md# Webviews, WebviewViews, Custom Editors, strict CSP & nonces
-│               ├── 04-language-features-and-lsp.md  # TextMate grammars, semantic tokens, LSP client
-│               ├── 05-ai-and-copilot-extensibility.md # Language Model API (vscode.lm), Chat Participants, Tools, MCP
-│               ├── 06-ux-design-guidelines.md       # Human interface guidelines, anti-spam rules, walkthroughs
-│               ├── 07-advanced-extensibility.md      # Debuggers (DAP), SCM, Tasks, Test Controllers, Virtual FS
-│               ├── 08-testing-and-debugging.md       # @vscode/test-cli, @vscode/test-electron, launch.json, CI
-│               ├── 09-bundling-publishing-and-ci.md # esbuild bundling, @vscode/vsce, Open VSX, GitHub Actions
-│               ├── 10-api-cheatsheet-and-contributions.md # vscode.* namespaces, contribution points, theme colors
-│               └── 11-starter-recipes-and-boilerplates.md # Zero-dependency blueprints (Minimal, TreeView, Webview, LSP)
-├── AGENTS.md                                         # Agent workspace instructions & skill usage
-└── README.md                                         # This documentation
+│   ├── memory/                               # Project context & memory rules
+│   │   ├── project.md
+│   │   └── rules.md
+│   └── skills/                               # 🌟 Central skills directory
+│       └── vscode-extension-creator/          # [Skill 1] VS Code Extension Creator
+│           ├── SKILL.md                      # Entrypoint: rules, decision tree, workflow
+│           └── references/                   # 11 Modular domain guides & blueprints
+│               ├── 01-architecture-and-anatomy.md
+│               ├── 02-workbench-and-ui.md
+│               ├── 03-webviews-and-custom-editors.md
+│               ├── 04-language-features-and-lsp.md
+│               ├── 05-ai-and-copilot-extensibility.md
+│               ├── 06-ux-design-guidelines.md
+│               ├── 07-advanced-extensibility.md
+│               ├── 08-testing-and-debugging.md
+│               ├── 09-bundling-publishing-and-ci.md
+│               ├── 10-api-cheatsheet-and-contributions.md
+│               └── 11-starter-recipes-and-boilerplates.md
+├── AGENTS.md                                 # Workspace guidance for AI Agents
+├── INTRODUCTION.md                           # คู่มือแนะนำภาพรวมภาษาไทย
+└── README.md                                 # This document
 ```
 
 ---
 
-## 🚀 How to Use this Skill
+## 🚀 How to Use (วิธีการนำไปใช้งาน)
 
-### Pure Markdown, Zero-Dependency Architecture
-This skill contains **zero runtime dependencies** and no dummy project folders with `package.json` inside the skill. When an agent is tasked with building an extension, it generates the project structure on-the-fly directly into the user's workspace.
+### 1. ติดตั้งเป็น Global Skills ในเครื่องของคุณ (แนะนำที่สุด 🌟)
+หากต้องการให้ AI Agent ในเครื่องของคุณสามารถเรียกใช้ทุก Skill ในคลังนี้ได้จากทุกโปรเจกต์:
 
-### For AI Coding Agents (Antigravity, Claude Code, Cursor)
-When you ask an agent to build, update, or troubleshoot a VS Code extension, the agent will:
-1. Load [`.agents/skills/vscode-extension-creator/SKILL.md`](.agents/skills/vscode-extension-creator/SKILL.md).
-2. Consult [`references/11-starter-recipes-and-boilerplates.md`](.agents/skills/vscode-extension-creator/references/11-starter-recipes-and-boilerplates.md) to generate the baseline files directly into the target project workspace.
-3. Consult the relevant modular guides in `references/` for API patterns, CSP security rules, or contribution schemas.
-4. Validate TypeScript types against `@types/vscode` and run tests with `@vscode/test-cli`.
+```bash
+mkdir -p ~/.agents/skills
 
-### For Human Developers
-- **Starting a new extension**: Open `references/11-starter-recipes-and-boilerplates.md` and copy the boilerplate files (Minimal, TreeView, Webview, or LSP Client) into your project.
-- **API Reference**: Open `references/10-api-cheatsheet-and-contributions.md` for a quick index of all `vscode.*` APIs and manifest contribution points.
-- **AI & Copilot Features**: Check `references/05-ai-and-copilot-extensibility.md` to learn how to add `@agent` bots and AI tools to GitHub Copilot Chat.
+# Symlink เฉพาะ skill ที่ต้องการ (เช่น vscode-extension-creator)
+ln -s "$(pwd)/.agents/skills/vscode-extension-creator" ~/.agents/skills/vscode-extension-creator
+
+# หรือ Symlink ทุก skills ในคลังนี้พร้อมกัน:
+for skill in .agents/skills/*; do
+  [ -d "$skill" ] && ln -sf "$(pwd)/$skill" ~/.agents/skills/$(basename "$skill")
+done
+```
+
+### 2. นำไปใช้ในเครื่องอื่นผ่าน Git Clone
+```bash
+git clone https://github.com/most-too/most-agents-skill.git
+cd most-agents-skill
+```
+จากนั้นทำ Symlink หรือก๊อปปี้โฟลเดอร์ใน `.agents/skills/` ไปยัง `~/.agents/skills/` ของเครื่องปลายทาง
+
+### 3. นำไปใช้เฉพาะโปรเจกต์ (Project-level)
+ก๊อปปี้โฟลเดอร์ของ Skill ที่ต้องการ (เช่น `.agents/skills/vscode-extension-creator`) ไปวางไว้ในไดเรกทอรี `.agents/skills/` ของโปรเจกต์เป้าหมาย
 
 ---
 
-## 🛠️ Verification & Quality Standards
+## ➕ การเพิ่ม Skill ใหม่ลงในคลังนี้ (Adding a New Skill)
 
-All code blueprints and modular guides adhere to:
-- **Strict Disposables Management**: All registered providers and commands are tracked in `context.subscriptions`.
-- **Strict Webview Security**: Content Security Policy (CSP) with dynamic cryptographic nonces and restricted local resource roots.
-- **Fast Startup & Minimal Bundle Size**: Bundled with `esbuild`, externalizing the `vscode` module, and optimized with `.vscodeignore`.
-- **Zero Notification Spam**: Conforming to VS Code Human Interface Guidelines.
+เพื่อรักษามาตรฐานความสะอาดและความเป็นระบบของคลังนี้ ทุก Skill ใหม่ควรปฏิบัติตามข้อกำหนดดังนี้:
+1. สร้างโฟลเดอร์ใหม่ภายใต้ `.agents/skills/<skill-name>/`
+2. มีไฟล์ **`SKILL.md`** เป็นจุดเริ่มต้นหลัก พร้อม YAML frontmatter (`name`, `description`)
+3. ใช้แนวคิด **Pure Markdown (Zero-Dependency)** — ห้ามใส่ `node_modules` หรือสร้าง `package.json` ค้างไว้ในโฟลเดอร์ Skill โดยเด็ดขาด ให้ใช้เป็น Code Blueprints / Recipes ในโฟลเดอร์ `references/` แทน
+4. เพิ่มรายชื่อ Skill ลงในตาราง **Skills Catalog** ของ `README.md` และ `INTRODUCTION.md`
+
+---
+
+## 📖 เอกสารภาษาไทย
+อ่านรายละเอียดความเป็นมาและคู่มือเจาะลึกภาษาไทยได้ที่ [INTRODUCTION.md](INTRODUCTION.md)
